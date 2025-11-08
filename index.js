@@ -1,1 +1,1 @@
-export {RateLimiter} from "./lib/rate_limiter";
+const {RateLimiter} = require("./lib/rate_limiter");
