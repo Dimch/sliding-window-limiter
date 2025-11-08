@@ -1,0 +1,32 @@
+{
+  "name": "sliding-window-limiter",
+  "version": "1.0.0",
+  "description": "Implementation of the Sliding Window rate limiting algorithm",
+  "keywords": [
+    "sliding-window",
+    "rolling-buckets",
+    "rate-limiting"
+  ],
+  "homepage": "https://github.com/Dimch/sliding-window-limiter#readme",
+  "bugs": {
+    "url": "https://github.com/Dimch/sliding-window-limiter/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dimch/sliding-window-limiter.git"
+  },
+  "license": "ISC",
+  "author": "Dima Michaelov",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "jest": "^30.2.0",
+    "luxon": "^3.7.2"
+  }
+}
