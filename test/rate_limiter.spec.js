@@ -1,4 +1,3 @@
-const {DateTime} = require('luxon');
 const {cloneDeep} = require('lodash/fp');
 const {RateLimiter} = require('../lib/rate_limiter');
 const {Window} = require('../lib/window');
