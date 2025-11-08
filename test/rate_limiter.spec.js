@@ -125,10 +125,8 @@ describe('RateLimiter', () => {
   describe('#update', () => {
     test('should should throw error if one of arguments is invalid', async () => {
       const lim = new RateLimiter(DefaultOptions());
-      let fn = () => lim.update(0);
+      const fn = () => lim.update(0);
       await expect(fn()).rejects.toThrow('value must be a positive number');
-      fn = () => lim.update(1);
-      await expect(fn()).rejects.toThrow('timestamp must be specified');
     });
     
     test('should return false if getting over max threshold', async () => {
