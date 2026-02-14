@@ -147,4 +147,44 @@ describe('RateLimiter', () => {
       await expect(fn()).rejects.toThrow('Failed to update rate-limit window ip-req-per-minute-max10-u00001');
     });
   });
+
+  describe('#updateTime', () => {
+    test('should update window with ISO timestamp string', async () => {
+      const lim = new RateLimiter(DefaultOptions());
+      await expect(lim.updateTime('2025-01-01T00:00:30Z')).resolves.toBeUndefined();
+      expect(MockStore.set).toHaveBeenCalled();
+    });
+
+    test('should update window with Date object', async () => {
+      const lim = new RateLimiter(DefaultOptions());
+      const date = new Date('2025-01-01T00:00:30Z');
+      await expect(lim.updateTime(date)).resolves.toBeUndefined();
+      expect(MockStore.set).toHaveBeenCalled();
+    });
+
+    test('should throw error if timestamp is invalid', async () => {
+      const lim = new RateLimiter(DefaultOptions());
+      const fn = () => lim.updateTime('invalid-timestamp');
+      await expect(fn()).rejects.toThrow('timestamp must be valid DateTime, Date or ISO string');
+    });
+
+    test('should throw error if timestamp is null or undefined', async () => {
+      const lim = new RateLimiter(DefaultOptions());
+      const fn = () => lim.updateTime(null);
+      await expect(fn()).rejects.toThrow('timestamp must be valid DateTime, Date or ISO string');
+    });
+
+    test('should throw an error if failed to update store', async () => {
+      const lim = new RateLimiter({...DefaultOptions(), store: ErrorStore});
+      const fn = () => lim.updateTime('2025-01-01T00:00:30Z');
+      await expect(fn()).rejects.toThrow('Failed to update rate-limit window ip-req-per-minute-max10-u00001');
+    });
+
+    test('should initialize window if not already initialized', async () => {
+      const lim = new RateLimiter(DefaultOptions());
+      expect(lim.window).toBeFalsy();
+      await lim.updateTime('2025-01-01T00:00:30Z');
+      expect(lim.window).toBeTruthy();
+    });
+  });
 });
