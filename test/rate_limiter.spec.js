@@ -171,7 +171,7 @@ describe('RateLimiter', () => {
     test('should throw error if timestamp is null or undefined', async () => {
       const lim = new RateLimiter(DefaultOptions());
       const fn = () => lim.updateTime(null);
-      await expect(fn()).rejects.toThrow('timestamp must be valid DateTime, Date or ISO string');
+      await expect(fn()).rejects.toThrow('timestamp is required');
     });
 
     test('should throw an error if failed to update store', async () => {
